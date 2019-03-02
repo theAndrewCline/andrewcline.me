@@ -1,6 +1,6 @@
 before_script:
   - apt-get update && apt-get install -y nodejs
-  - apt-get install npm
+  - npm -v
 
 lint_test:
   script:
