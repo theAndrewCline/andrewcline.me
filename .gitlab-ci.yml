@@ -1,8 +1,6 @@
 before_script:
-
-install_node: 
-  - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-  - sudo apt-get install -y nodejs
+  - apt-get update && apt-get install -y nodejs
+  - npm install yarn -g
 
 lint:
   script:
@@ -10,4 +8,4 @@ lint:
 
 test: 
   script:
-  - yarn test:ci
+  - yarn test
