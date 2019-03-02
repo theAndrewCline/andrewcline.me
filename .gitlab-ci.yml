@@ -1,8 +1,10 @@
-before_script:
-  - apt-get update && apt-get install -y nodejs
-  - npm -v
+image: node:4.2.2
+
+services:
+  - postgres:9.5.0
 
 lint_test:
   script:
+  - npm install yarn -g
   - yarn lint
   - yarn test
