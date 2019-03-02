@@ -4,12 +4,10 @@ before_script:
   - apt-get update -qq && apt-get install -y -qq yarn
   - yarn -v 
 
-build:
+lint:
   script:
-  - yarn install
-  - yarn build
+  - yarn lint
 
-serve: 
+test: 
   script:
-  - yarn add global serve
-  - serve -s build
+  - yarn test:ci
