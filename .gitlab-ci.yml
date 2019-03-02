@@ -1,11 +1,8 @@
 before_script:
   - apt-get update && apt-get install -y nodejs
-  - npm install yarn -g
+  - apt-get install npm
 
-lint:
+lint_test:
   script:
   - yarn lint
-
-test: 
-  script:
   - yarn test
