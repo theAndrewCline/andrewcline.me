@@ -3,10 +3,9 @@ image: node:10-alpine
 services:
   - postgres:9.5.0
 
-before_scripts:
-  - npm install yarn -g
-  - yarn install
 
 all_tests:
   script:
+  - npm install yarn -g
+  - yarn install
   - yarn test
