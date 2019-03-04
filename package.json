@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.16.4",
+    "forever": "^0.15.3",
     "global": "^4.3.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
@@ -16,7 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "standard",
-    "serve": "serve ./build"
+    "serve": "forever start index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -26,5 +28,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
 }

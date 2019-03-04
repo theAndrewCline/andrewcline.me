@@ -1,11 +1,11 @@
-FROM node:10-alpine
+FROM node:10
 
-WORKDIR /opt/app
+WORKDIR /opt/www
+RUN npm install -g -s --no-progess yarn
+COPY package*.json ./
+RUN yarn install
 
-ADD . /opt/app
-RUN npm install -g -s --no-progess yarn && \
-    yarn && \
-    yarn build && \
-    yarn cache clean
-CMD [ "yarn", "serve" ]
+COPY . .
+
 EXPOSE 5000
+CMD ["yarn", "serve"]
