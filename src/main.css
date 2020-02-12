@@ -1,3 +1,8 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
 /*
   elm-hot creates an additional div wrapper around the app to make HMR possible.
   This could break styling in development mode if you are using Elm UI.
@@ -23,4 +28,12 @@ h1 {
 img {
   margin: 20px 0;
   max-width: 200px;
+}
+
+.cursive {
+  font-family: 'Rock Salt', cursive;
+}
+
+.serif {
+  font-family: 'PT Serif', serif;
 }
