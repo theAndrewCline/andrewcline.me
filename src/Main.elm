@@ -37,11 +37,11 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
+    div [ class "min-h-screen flex flex-col align-center bg-gray-100" ]
         [ h1 [ class "cursive" ] [ text "Andrew Cline" ]
-        , img [ src "./headshot.jpg" ] []
-        , h3 [ class "serif" ] [ text "Software Developer" ]
-        , h3 [ class "serif" ] [ text "Peoria, IL" ]
+        , img [ src "./headshot.jpg", class "mx-auto rounded-full" ] []
+        , h3 [ class "font-serif" ] [ text "Software Developer" ]
+        , h3 [ class "font-serif" ] [ text "Peoria, IL" ]
         ]
 
 
