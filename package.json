@@ -1,0 +1,33 @@
+{
+  "name": "andrewcline.me",
+  "version": "1.0.0",
+  "description": "This project is bootstrapped with [Create Elm App](https://github.com/halfzebra/create-elm-app).",
+  "main": "src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "elm test",
+    "build-css": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theAndrewCline/andrewcline.me.git"
+  },
+  "keywords": [
+    "website",
+    "elm"
+  ],
+  "author": "Andrew Cline",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theAndrewCline/andrewcline.me/issues"
+  },
+  "homepage": "https://github.com/theAndrewCline/andrewcline.me#readme",
+  "devDependencies": {
+    "cypress": "^4.0.1"
+  },
+  "dependencies": {
+    "tailwindcss": "^1.2.0"
+  }
+}
