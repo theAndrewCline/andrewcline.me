@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "elm test",
-    "build-css": ""
+    "build-css": "",
+    "build": "elm-app build"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/theAndrewCline/andrewcline.me#readme",
   "devDependencies": {
+    "create-elm-app": "^4.2.1",
     "cypress": "^4.0.2"
   },
   "dependencies": {
