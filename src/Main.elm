@@ -60,12 +60,14 @@ view model =
             [ a [ class "mx-2", href "https://github.com/theAndrewCline" ]
                 [ button [ class "bg-black rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Github" ]
                 ]
-            , a [ class "mx-2", href "https://github.com/theAndrewCline" ]
-                [ button [ class "bg-blue-600 rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Linkedin" ]
-                ]
-            , a [ class "mx-2", href "https://github.com/theAndrewCline" ]
-                [ button [ class "bg-red-600 rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Resume" ]
-                ]
+
+            -- Disabled temporarily
+            -- , a [ class "mx-2", href "https://github.com/theAndrewCline" ]
+            --     [ button [ class "bg-blue-600 rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Linkedin" ]
+            --     ]
+            -- , a [ class "mx-2", href "https://github.com/theAndrewCline" ]
+            --     [ button [ class "bg-red-600 rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Resume" ]
+            --     ]
             ]
         ]
 
