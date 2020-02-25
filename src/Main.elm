@@ -58,7 +58,7 @@ view model =
             ]
         , div [ class "container mx-auto flex items-center justify-center" ]
             [ a [ class "mx-2", href "https://github.com/theAndrewCline" ]
-                [ button [ class "bg-black rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Github" ]
+                [ button [ class "bg-black rounded shadow-lg text-gray-100 p-2 font-body w-32" ] [ text "Github" ]
                 ]
 
             -- Disabled temporarily
