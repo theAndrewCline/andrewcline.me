@@ -50,7 +50,22 @@ type Msg
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+  case msg of
+   LinkClicked urlRequest ->
+     case urlRequest of
+       Browser.Internal url ->
+          ( model, Nav.pushUrl model.key (Url.toString url) )
+
+       Browser.External href ->
+          ( model, Nav.load href )
+
+   UrlChanged url ->
+     ( { model | url = url }
+     , Cmd.none
+     )
+
+   NoOp ->
+      ( model, Cmd.none )
 
 
 
@@ -78,30 +93,53 @@ view model =
                 -- , li [ class "mx-4 text-gray-100" ] [ text "Bio" ]
                 -- , li [ class "mx-4 text-gray-100" ] [ text "Resume" ]
                 -- , li [ class "mx-4 text-gray-100" ] [ text "Projects" ]
-                -- , li [ class "mx-4 text-gray-100" ] [ text "Blog" ]
-                ]
-            , div
-                [ class "container mx-auto my-4 py-4 flex justify-center" ]
-                [ img [ src "./headshot.jpg", class "mr-4 h-40 rounded shadow-lg" ] []
-                , div [ class "flex flex-col items-start justify-center" ]
-                    [ h1 [ class "font-display text-3xl mb-2" ] [ text "Andrew Cline" ]
-                    , h3 [ class "font-body font-bold text-xl" ] [ text "Software Developer" ]
-                    , h3 [ class "font-body text-lg mb-2" ] [ text "Peoria, IL" ]
+                , li [] [
+                    a [ class "mx-4 text-gray-100", href "/posts"] [ text "Posts" ]
                     ]
                 ]
-            , div [ class "container mx-auto flex items-center justify-center" ]
-                [ a [ class "mx-2", href "https://github.com/theAndrewCline" ]
-                    [ button [ class "bg-black rounded shadow-lg text-gray-100 p-2 font-body w-32" ] [ text "Github" ]
-                    ]
-
-                -- Disabled temporarily
-                -- , a [ class "mx-2", href "https://github.com/theAndrewCline" ]
-                --     [ button [ class "bg-blue-600 rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Linkedin" ]
-                --     ]
-                -- , a [ class "mx-2", href "https://github.com/theAndrewCline" ]
-                --     [ button [ class "bg-red-600 rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Resume" ]
-                --     ]
-                ]
+                , routeView model
             ]
         ]
     }
+
+routeView : Model -> Html msg
+routeView model =
+    case Url.toString model.url of
+        "posts" ->
+            postView
+
+        _ -> 
+            homeView
+
+
+
+homeView : Html msg
+homeView =
+    div [] [
+        div
+            [ class "container mx-auto my-4 py-4 flex justify-center" ]
+            [ img [ src "./headshot.jpg", class "mr-4 h-40 rounded shadow-lg" ] []
+            , div [ class "flex flex-col items-start justify-center" ]
+                [ h1 [ class "font-display text-3xl mb-2" ] [ text "Andrew Cline" ]
+                , h3 [ class "font-body font-bold text-xl" ] [ text "Software Developer" ]
+                , h3 [ class "font-body text-lg mb-2" ] [ text "Peoria, IL" ]
+                ]
+            ]
+        , div [ class "container mx-auto flex items-center justify-center" ]
+            [ a [ class "mx-2", href "https://github.com/theAndrewCline" ]
+                [ button [ class "bg-black rounded shadow-lg text-gray-100 p-2 font-body w-32" ] [ text "Github" ]
+                ]
+
+            -- Disabled temporarily
+            -- , a [ class "mx-2", href "https://github.com/theAndrewCline" ]
+            --     [ button [ class "bg-blue-600 rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Linkedin" ]
+            --     ]
+            -- , a [ class "mx-2", href "https://github.com/theAndrewCline" ]
+            --     [ button [ class "bg-red-600 rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Resume" ]
+            --     ]
+            ]
+    ] 
+
+postView : Html msg
+postView =
+    div [] [ text "Posts" ]

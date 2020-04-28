@@ -30,6 +30,7 @@
     "cypress": "^4.0.2"
   },
   "dependencies": {
+    "elm-format": "^0.8.3",
     "tailwindcss": "^1.2.0"
   }
 }
