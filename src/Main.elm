@@ -5,6 +5,7 @@ import Browser.Navigation as Nav
 import Html exposing (Html, a, button, div, h1, h3, img, li, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Url
+import Url.Parser exposing (Parser, (</>), int, map, oneOf, s, string)
 
 
 
@@ -143,3 +144,16 @@ homeView =
 postView : Html msg
 postView =
     div [] [ text "Posts" ]
+
+-- ROUTE PARSER
+
+type Route
+  = Home
+  | Posts
+
+routeParser : Parser (Route -> a) a
+routeParser =
+  oneOf
+    [ map    (s "topic" </> string)
+    , map Blog    (s "blog" </> int)
+    ]
