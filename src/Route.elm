@@ -6,14 +6,14 @@ import Url.Parser exposing (Parser, map, oneOf, parse, s, top)
 
 type Route
     = Home
-    | PostSearch
+    | Posts
 
 
 routeParser : Parser (Route -> a) a
 routeParser =
     oneOf
         [ map Home top
-        , map PostSearch (s "posts")
+        , map Posts (s "posts")
         ]
 
 

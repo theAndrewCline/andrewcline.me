@@ -84,26 +84,46 @@ subscriptions _ =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "Andrew Cline"
-    , body =
-        [ div [ class "min-h-screen flex flex-col align-center bg-gray-100" ]
-            [ ul [ class "flex bg-black py-4 font-body font-bold" ]
-                [ li [ class "mr-auto" ]
-                    [ a [ class "mx-4 text-gray-100 bold font-display", href "/" ] [ text "Andrew Cline" ]
-                    ]
+    { title = titleForRoute model.url
+    , body = [ div [ class "min-h-screen flex flex-col align-center bg-gray-100" ] [ navBar, router model ] ]
+    }
 
-                -- DISABLED MENU OPTIONS UNTIL PAGES ARE CREATED
-                -- , li [ class "mx-4 text-gray-100" ] [ text "Bio" ]
-                -- , li [ class "mx-4 text-gray-100" ] [ text "Resume" ]
-                -- , li [ class "mx-4 text-gray-100" ] [ text "Projects" ]
-                , li []
-                    [ a [ class "mx-4 text-gray-100", href "/posts" ] [ text "Posts" ]
-                    ]
-                ]
-            , routeView model
+
+navBar : Html msg
+navBar =
+    ul [ class "flex bg-black py-4 font-body font-bold" ]
+        [ li [ class "mr-auto" ]
+            [ a [ class "mx-4 text-gray-100 bold font-display", href "/" ] [ text "Andrew Cline" ]
+            ]
+
+        -- DISABLED MENU OPTIONS UNTIL PAGES ARE CREATED
+        -- , li [ class "mx-4 text-gray-100" ] [ text "Bio" ]
+        -- , li [ class "mx-4 text-gray-100" ] [ text "Resume" ]
+        -- , li [ class "mx-4 text-gray-100" ] [ text "Projects" ]
+        , li []
+            [ a [ class "mx-4 text-gray-100", href "/posts" ] [ text "Posts" ]
             ]
         ]
-    }
+
+
+titleForRoute : Url.Url -> String
+titleForRoute url =
+    case toRoute url of
+        Home ->
+            "Andrew Cline"
+
+        Posts ->
+            "Posts | Andrew Cline"
+
+
+router : Model -> Html Msg
+router model =
+    case toRoute model.url of
+        Home ->
+            homeView
+
+        Posts ->
+            postView
 
 
 homeView : Html msg
@@ -136,14 +156,4 @@ homeView =
 
 postView : Html msg
 postView =
-    div [ class "container flex items-center justify-center" ] [ text "Posts Coming Soon" ]
-
-
-routeView : Model -> Html msg
-routeView model =
-    case toRoute model.url of
-        Home ->
-            homeView
-
-        PostSearch ->
-            postView
+    div [ class "flex items-center justify-center" ] [ h3 [ class "mt-4" ] [ text "Posts Coming Soon" ] ]
