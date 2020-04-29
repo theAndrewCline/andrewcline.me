@@ -4,8 +4,8 @@ import Browser
 import Browser.Navigation as Nav
 import Html exposing (Html, a, button, div, h1, h3, img, li, text, ul)
 import Html.Attributes exposing (class, href, src)
+import Route exposing (Route(..), toRoute)
 import Url
-import Url.Parser exposing (Parser, (</>), int, map, oneOf, s, string)
 
 
 
@@ -51,22 +51,22 @@ type Msg
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-   LinkClicked urlRequest ->
-     case urlRequest of
-       Browser.Internal url ->
-          ( model, Nav.pushUrl model.key (Url.toString url) )
+    case msg of
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Browser.Internal url ->
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
 
-       Browser.External href ->
-          ( model, Nav.load href )
+                Browser.External href ->
+                    ( model, Nav.load href )
 
-   UrlChanged url ->
-     ( { model | url = url }
-     , Cmd.none
-     )
+        UrlChanged url ->
+            ( { model | url = url }
+            , Cmd.none
+            )
 
-   NoOp ->
-      ( model, Cmd.none )
+        NoOp ->
+            ( model, Cmd.none )
 
 
 
@@ -88,36 +88,28 @@ view model =
     , body =
         [ div [ class "min-h-screen flex flex-col align-center bg-gray-100" ]
             [ ul [ class "flex bg-black py-4 font-body font-bold" ]
-                [ li [ class "mx-4 text-gray-100 bold mr-auto font-display" ] [ text "Andrew Cline" ]
+                [ li [ class "mr-auto" ]
+                    [ a [ class "mx-4 text-gray-100 bold font-display", href "/" ] [ text "Andrew Cline" ]
+                    ]
 
                 -- DISABLED MENU OPTIONS UNTIL PAGES ARE CREATED
                 -- , li [ class "mx-4 text-gray-100" ] [ text "Bio" ]
                 -- , li [ class "mx-4 text-gray-100" ] [ text "Resume" ]
                 -- , li [ class "mx-4 text-gray-100" ] [ text "Projects" ]
-                , li [] [
-                    a [ class "mx-4 text-gray-100", href "/posts"] [ text "Posts" ]
+                , li []
+                    [ a [ class "mx-4 text-gray-100", href "/posts" ] [ text "Posts" ]
                     ]
                 ]
-                , routeView model
+            , routeView model
             ]
         ]
     }
 
-routeView : Model -> Html msg
-routeView model =
-    case Url.toString model.url of
-        "posts" ->
-            postView
-
-        _ -> 
-            homeView
-
-
 
 homeView : Html msg
 homeView =
-    div [] [
-        div
+    div []
+        [ div
             [ class "container mx-auto my-4 py-4 flex justify-center" ]
             [ img [ src "./headshot.jpg", class "mr-4 h-40 rounded shadow-lg" ] []
             , div [ class "flex flex-col items-start justify-center" ]
@@ -139,21 +131,19 @@ homeView =
             --     [ button [ class "bg-red-600 rounded shadow-lg text-gray-100 p-2 font-body w-20" ] [ text "Resume" ]
             --     ]
             ]
-    ] 
+        ]
+
 
 postView : Html msg
 postView =
-    div [] [ text "Posts" ]
+    div [ class "container flex items-center justify-center" ] [ text "Posts Coming Soon" ]
 
--- ROUTE PARSER
 
-type Route
-  = Home
-  | Posts
+routeView : Model -> Html msg
+routeView model =
+    case toRoute model.url of
+        Home ->
+            homeView
 
-routeParser : Parser (Route -> a) a
-routeParser =
-  oneOf
-    [ map    (s "topic" </> string)
-    , map Blog    (s "blog" </> int)
-    ]
+        PostSearch ->
+            postView
