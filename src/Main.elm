@@ -4,6 +4,9 @@ import Browser
 import Browser.Navigation as Nav
 import Html exposing (Html, a, button, div, h1, h3, img, li, text, ul)
 import Html.Attributes exposing (class, href, src)
+import Http
+import Markdown
+import Post exposing (Post, postDecoder)
 import Route exposing (Route(..), toRoute)
 import Url
 
@@ -31,12 +34,15 @@ main =
 type alias Model =
     { key : Nav.Key
     , url : Url.Url
+    , posts : List String
     }
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-    ( Model key url, Cmd.none )
+    ( Model key url []
+    , getPosts
+    )
 
 
 
@@ -47,6 +53,7 @@ type Msg
     = NoOp
     | LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
+    | GotPosts (Result Http.Error (List Post))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -64,6 +71,14 @@ update msg model =
             ( { model | url = url }
             , Cmd.none
             )
+
+        GotPosts result ->
+            case result of
+                Ok posts ->
+                    ( { model | posts = posts }, Cmd.none )
+
+                Err _ ->
+                    ( model, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )
@@ -123,7 +138,7 @@ router model =
             homeView
 
         Posts ->
-            postView
+            postView model.posts
 
 
 homeView : Html msg
@@ -154,6 +169,20 @@ homeView =
         ]
 
 
-postView : Html msg
-postView =
-    div [ class "flex items-center justify-center" ] [ h3 [ class "mt-4" ] [ text "Posts Coming Soon" ] ]
+postView : List String -> Html msg
+postView posts =
+    div
+        [ class "flex items-center justify-center" ]
+        (List.map (\post -> Markdown.toHtml [ class "mt-4" ] post) posts)
+
+
+
+-- HTTP
+
+
+getPosts : Cmd Msg
+getPosts =
+    Http.get
+        { url = "./cms.json"
+        , expect = Http.expectJson GotPosts postDecoder
+        }
