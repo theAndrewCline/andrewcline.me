@@ -5,6 +5,7 @@ import Browser.Navigation as Nav
 import Html exposing (Html, a, button, div, h1, h3, img, li, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Http
+import Markdown
 import Post exposing (Post, postDecoder)
 import Route exposing (Route(..), toRoute)
 import Url
@@ -172,7 +173,7 @@ postView : List String -> Html msg
 postView posts =
     div
         [ class "flex items-center justify-center" ]
-        (List.map (\post -> h3 [ class "mt-4" ] [ text post ]) posts)
+        (List.map (\post -> Markdown.toHtml [ class "mt-4" ] post) posts)
 
 
 
