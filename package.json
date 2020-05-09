@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "elm-format": "^0.8.3",
+    "netlify-cms": "^2.10.48",
     "tailwindcss": "^1.2.0"
   }
 }

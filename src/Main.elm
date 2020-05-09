@@ -172,7 +172,7 @@ homeView =
 postView : List String -> Html msg
 postView posts =
     div
-        [ class "flex items-center justify-center" ]
+        [ class "flex flex-col items-center justify-center" ]
         (List.map (\post -> Markdown.toHtml [ class "mt-4" ] post) posts)
 
 
