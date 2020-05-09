@@ -1,1 +1,1 @@
-{"posts":["# test\n\nthis is a test\n"]}
+{"posts":["---\nlayout: blog\ntitle: A New Fancy Post\ndate: 2020-05-08T16:27:23.572Z\nrating: 5\n---\nThis is my new fancy post. \n\n\n\nIt has cool things like code snippets\n\n\n\n```\ntype Human = \n  { name: String\n  , hairColor: String\n  , eyeColor: String\n  }\n\ntype Dog =\n  { name: String\n  , furColor: String\n  , eyeColor: String\n  }\n  \n  \ngetName : { a | name } -> String\ngetName named =\n  named.name\n```","# test\n\nthis is a test\n"]}
