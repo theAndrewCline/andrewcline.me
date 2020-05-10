@@ -9,12 +9,12 @@ media_folder: "images/uploads"
 collections:
   - name: "posts" # Used in routes, e.g., /admin/collections/blog
     label: "Posts" # Used in the UI
-    folder: "public/static" # The path to the folder where the documents are stored
+    folder: "public/static/posts" # The path to the folder where the documents are stored
     format: "json"
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
     - {label: "Title", name: "title", widget: "string"}
     - {label: "Publish Date", name: "date", widget: "datetime"}
-    - {label: "Descript", name: "description", widget: "string"}
+    - {label: "Description", name: "description", widget: "string"}
     - {label: "Body", name: "body", widget: "markdown"}
