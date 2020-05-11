@@ -7,7 +7,7 @@ import Html exposing (Html, a, button, div, h1, h3, img, li, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Http
 import Markdown
-import Route exposing (Route(..), toRoute)
+import Route exposing (Route(..), cleanPostTitle, toRoute)
 import Url
 
 
@@ -130,6 +130,9 @@ titleForRoute url =
         Posts ->
             "Posts | Andrew Cline"
 
+        PostRoute title ->
+            title ++ " | Andrew Cline"
+
 
 router : Model -> Html Msg
 router model =
@@ -139,6 +142,9 @@ router model =
 
         Posts ->
             postListView model.posts
+
+        PostRoute title ->
+            postRouteView title model
 
 
 homeView : Html msg
@@ -169,16 +175,44 @@ homeView =
         ]
 
 
+findPostByTitle : String -> List Post -> Maybe Post
+findPostByTitle title posts =
+    List.head <| List.filter (\post -> title == cleanPostTitle post.title) posts
+
+
+postRouteView : String -> Model -> Html msg
+postRouteView title model =
+    let
+        postToView =
+            findPostByTitle title model.posts
+    in
+    case postToView of
+        Just post ->
+            div
+                [ class "flex flex-col items-center justify-center" ]
+                [ h1 [ class "text-2xl font-bold mt-4" ] [ text post.title ]
+                , h3 [ class "italic" ] [ text post.description ]
+                , Markdown.toHtml [ class "mt-4" ] post.body
+                ]
+
+        Nothing ->
+            div [] [ text "post not found" ]
+
+
 postListView : List Post -> Html msg
 postListView posts =
-    div
-        [ class "flex flex-col items-center justify-center" ]
-        (List.map postListItem posts)
+    if List.isEmpty posts then
+        div [ class "flex flex-col items-center justify-center" ] [ text "Posts coming soon!" ]
+
+    else
+        div
+            [ class "flex flex-col items-center justify-center" ]
+            (List.map postListItem posts)
 
 
 postListItem : Post -> Html msg
 postListItem post =
-    a [ href ("/posts/" ++ post.title) ]
+    a [ href ("/posts/" ++ cleanPostTitle post.title) ]
         [ div [ class "mt-4" ]
             [ h1 [ class "text-2xl" ] [ text post.title ]
             , h3 [] [ text post.description ]
@@ -187,12 +221,6 @@ postListItem post =
 
 
 
--- Commenting this  out for now, I will use this name when I am rendering a single post.
--- postView : List Post -> Html msg
--- postView posts =
---     div
---         [ class "flex flex-col items-center justify-center" ]
---         (List.map (\post -> Markdown.toHtml [ class "mt-4" ] post.body) posts)
 -- HTTP
 
 
