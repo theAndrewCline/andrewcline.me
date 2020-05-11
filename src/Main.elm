@@ -2,12 +2,12 @@ module Main exposing (..)
 
 import Browser
 import Browser.Navigation as Nav
+import CmsInfo exposing (CmsInfo, Post, cmsDecoder)
 import Html exposing (Html, a, button, div, h1, h3, img, li, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Http
 import Markdown
-import Post exposing (Post, postDecoder)
-import Route exposing (Route(..), toRoute)
+import Route exposing (Route(..), cleanPostTitle, toRoute)
 import Url
 
 
@@ -34,7 +34,7 @@ main =
 type alias Model =
     { key : Nav.Key
     , url : Url.Url
-    , posts : List String
+    , posts : List Post
     }
 
 
@@ -53,7 +53,7 @@ type Msg
     = NoOp
     | LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
-    | GotPosts (Result Http.Error (List Post))
+    | GotCmsInfo (Result Http.Error CmsInfo)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -72,10 +72,10 @@ update msg model =
             , Cmd.none
             )
 
-        GotPosts result ->
+        GotCmsInfo result ->
             case result of
-                Ok posts ->
-                    ( { model | posts = posts }, Cmd.none )
+                Ok json ->
+                    ( { model | posts = json.posts }, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
@@ -130,6 +130,9 @@ titleForRoute url =
         Posts ->
             "Posts | Andrew Cline"
 
+        PostRoute title ->
+            title ++ " | Andrew Cline"
+
 
 router : Model -> Html Msg
 router model =
@@ -138,7 +141,10 @@ router model =
             homeView
 
         Posts ->
-            postView model.posts
+            postListView model.posts
+
+        PostRoute title ->
+            postRouteView title model
 
 
 homeView : Html msg
@@ -169,11 +175,49 @@ homeView =
         ]
 
 
-postView : List String -> Html msg
-postView posts =
-    div
-        [ class "flex flex-col items-center justify-center" ]
-        (List.map (\post -> Markdown.toHtml [ class "mt-4" ] post) posts)
+findPostByTitle : String -> List Post -> Maybe Post
+findPostByTitle title posts =
+    List.head <| List.filter (\post -> title == cleanPostTitle post.title) posts
+
+
+postRouteView : String -> Model -> Html msg
+postRouteView title model =
+    let
+        postToView =
+            findPostByTitle title model.posts
+    in
+    case postToView of
+        Just post ->
+            div
+                [ class "flex flex-col items-center justify-center" ]
+                [ h1 [ class "text-2xl font-bold mt-4" ] [ text post.title ]
+                , h3 [ class "italic" ] [ text post.description ]
+                , Markdown.toHtml [ class "mt-4" ] post.body
+                ]
+
+        Nothing ->
+            div [] [ text "post not found" ]
+
+
+postListView : List Post -> Html msg
+postListView posts =
+    if List.isEmpty posts then
+        div [ class "flex flex-col items-center justify-center" ] [ text "Posts coming soon!" ]
+
+    else
+        div
+            [ class "flex flex-col items-center justify-center" ]
+            (List.map postListItem posts)
+
+
+postListItem : Post -> Html msg
+postListItem post =
+    a [ href ("/posts/" ++ cleanPostTitle post.title) ]
+        [ div [ class "mt-4" ]
+            [ h1 [ class "text-2xl" ] [ text post.title ]
+            , h3 [] [ text post.description ]
+            ]
+        ]
 
 
 
@@ -184,5 +228,5 @@ getPosts : Cmd Msg
 getPosts =
     Http.get
         { url = "./cms.json"
-        , expect = Http.expectJson GotPosts postDecoder
+        , expect = Http.expectJson GotCmsInfo cmsDecoder
         }

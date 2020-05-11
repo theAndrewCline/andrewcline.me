@@ -1,30 +1,43 @@
 const fs = require('fs')
 const path = require('path')
 
-// returns an array of file names in posts
-// _ -> [ filenames ]
-const readFileNames = () => fs.readdirSync( path.resolve('./static/posts') )
+const folderPath = path.resolve('./public/static') 
 
-// Filename -> FileContent
-const readFile = (name) => fs
-  .readFileSync( path.resolve(`./static/posts/${name}`))
-  .toString()
 
-// [ filenames ] -> JSON with filenames
-const readFiles = (fileNames) => {
-  return fileNames.map(readFile)
+const readFolderNames = () => fs.readdirSync(folderPath)
+
+
+const readFilesInFolder = (folder) => { 
+  const fileToJson = (fileName) => 
+    JSON.parse(
+      fs.readFileSync(
+        path.resolve(`${folderPath}/${folder}/${fileName}`)
+      ).toString()
+    )
+
+  return fs
+    .readdirSync( path.resolve(`./public/static/${folder}`))
+    .map(fileToJson)
 }
 
-// [ filecontents ] -> JSON { posts: [ filecontents ] }
-const makeJSON = (posts) => JSON.stringify({ posts })
+
+const zip = (arr1, arr2) => {
+  return arr1.map((x, i) => [ x, arr2[i] ] )
+}
+
 
 const main = () => {
-  const json = makeJSON(readFiles(readFileNames()))
+  const folders = readFolderNames()
+  const contents = folders.map(readFilesInFolder)
+
+  const json = JSON.stringify(
+    Object.fromEntries(
+      zip(folders, contents)
+    )
+  )
 
   fs.writeFileSync( path.resolve('./public/cms.json'), json )
-
-  console.log('wrote cms.json')
 }
 
-main()
 
+main()
