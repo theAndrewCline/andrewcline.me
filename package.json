@@ -10,7 +10,7 @@
     "start": "elm-app start",
     "test": "elm test",
     "build-css": "",
-    "build": "elm-app build"
+    "build": "node ./static-build.js && elm-app build"
   },
   "repository": {
     "type": "git",
