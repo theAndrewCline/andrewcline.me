@@ -3,11 +3,13 @@ module Main exposing (..)
 import Browser
 import Browser.Navigation as Nav
 import CmsInfo exposing (CmsInfo, Post, cmsDecoder)
-import Html exposing (Html, a, button, div, h1, h3, img, li, text, ul)
-import Html.Attributes exposing (class, href, src)
+import Html exposing (Html, a, button, div, h1, h3, hr, img, input, li, text, ul)
+import Html.Attributes exposing (class, href, placeholder, src)
+import Html.Events exposing (onInput)
 import Http
 import Markdown
 import Route exposing (Route(..), cleanPostTitle, toRoute)
+import Simple.Fuzzy as Fuzzy
 import Url
 
 
@@ -35,12 +37,13 @@ type alias Model =
     { key : Nav.Key
     , url : Url.Url
     , posts : List Post
+    , postSearchKey : String
     }
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-    ( Model key url []
+    ( Model key url [] ""
     , getPosts
     )
 
@@ -54,6 +57,7 @@ type Msg
     | LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
     | GotCmsInfo (Result Http.Error CmsInfo)
+    | UpdatePostSearchKey String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -79,6 +83,9 @@ update msg model =
 
                 Err _ ->
                     ( model, Cmd.none )
+
+        UpdatePostSearchKey newKey ->
+            ( { model | postSearchKey = newKey }, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )
@@ -141,7 +148,7 @@ router model =
             homeView
 
         Posts ->
-            postListView model.posts
+            postListView model.posts model.postSearchKey
 
         PostRoute title ->
             postRouteView title model
@@ -199,23 +206,38 @@ postRouteView title model =
             div [] [ text "post not found" ]
 
 
-postListView : List Post -> Html msg
-postListView posts =
+postListView : List Post -> String -> Html Msg
+postListView posts searchTerm =
     if List.isEmpty posts then
         div [ class "flex flex-col items-center justify-center" ] [ text "Posts coming soon!" ]
 
     else
-        div
-            [ class "flex flex-col items-center justify-center" ]
-            (List.map postListItem posts)
+        div []
+            [ div []
+                [ input [ class "m-4 px-2 h-8 border-solid border-grey-500 border-2 rounded", placeholder "Search Posts", onInput UpdatePostSearchKey ]
+                    []
+                ]
+            , hr [ class "mx-4" ] []
+            , div
+                [ class "flex flex-col items-center justify-center" ]
+                (List.map
+                    postListItem
+                    (Fuzzy.filter
+                        .title
+                        searchTerm
+                        posts
+                    )
+                )
+            ]
 
 
 postListItem : Post -> Html msg
 postListItem post =
     a [ href ("/posts/" ++ cleanPostTitle post.title) ]
         [ div [ class "mt-4" ]
-            [ h1 [ class "text-2xl" ] [ text post.title ]
+            [ h1 [ class "text-2xl font-bold" ] [ text post.title ]
             , h3 [] [ text post.description ]
+            , hr [ class "mt-4" ] []
             ]
         ]
 
