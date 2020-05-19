@@ -10,3 +10,8 @@ Voila a static site builder. :tada:
 
 I think Elm is a nice way of writing web apps
 I thought it would be interesting to integrate Elm and Netlify CMS from scratch.
+
+This project is bootstrapped from create elm app. 
+I may setup a custom webpack config in the future,
+but for now use this [file] (https://github.com/theAndrewCline/andrewcline.me/blob/master/ELM-APP.md) for information on starting the application.
+
