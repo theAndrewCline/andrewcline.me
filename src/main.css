@@ -10182,11 +10182,11 @@ video {
 }
 
 .font-display {
-  font-family: Lora, serif;
+  font-family: Libre Baskerville, serif;
 }
 
 .font-body {
-  font-family: Open Sans, san-serif;
+  font-family: Lato, san-serif;
 }
 
 .font-hairline {
@@ -30827,11 +30827,11 @@ video {
   }
 
   .sm\:font-display {
-    font-family: Lora, serif;
+    font-family: Libre Baskerville, serif;
   }
 
   .sm\:font-body {
-    font-family: Open Sans, san-serif;
+    font-family: Lato, san-serif;
   }
 
   .sm\:font-hairline {
@@ -51407,11 +51407,11 @@ video {
   }
 
   .md\:font-display {
-    font-family: Lora, serif;
+    font-family: Libre Baskerville, serif;
   }
 
   .md\:font-body {
-    font-family: Open Sans, san-serif;
+    font-family: Lato, san-serif;
   }
 
   .md\:font-hairline {
@@ -71987,11 +71987,11 @@ video {
   }
 
   .lg\:font-display {
-    font-family: Lora, serif;
+    font-family: Libre Baskerville, serif;
   }
 
   .lg\:font-body {
-    font-family: Open Sans, san-serif;
+    font-family: Lato, san-serif;
   }
 
   .lg\:font-hairline {
@@ -92567,11 +92567,11 @@ video {
   }
 
   .xl\:font-display {
-    font-family: Lora, serif;
+    font-family: Libre Baskerville, serif;
   }
 
   .xl\:font-body {
-    font-family: Open Sans, san-serif;
+    font-family: Lato, san-serif;
   }
 
   .xl\:font-hairline {
