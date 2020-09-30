@@ -1,11 +1,11 @@
 module.exports = {
   theme: {
     fontFamily: {
-      display: ['Rock Salt', 'sans-serif'],
-      body: ['PT Serif', 'serif']
+      display: ['Libre Baskerville', 'serif'],
+      body: ['Lato', 'san-serif']
     },
-    extend: {},
+    extend: {}
   },
   variants: {},
-  plugins: [],
+  plugins: []
 }

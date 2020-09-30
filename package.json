@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/theAndrewCline/andrewcline.me#readme",
   "devDependencies": {
-    "create-elm-app": "^4.2.1",
-    "cypress": "^4.0.2"
+    "create-elm-app": "^4.5.0",
+    "cypress": "^4.12.1"
   },
   "dependencies": {
     "elm-format": "^0.8.3",
