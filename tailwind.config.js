@@ -1,11 +1,11 @@
 module.exports = {
   theme: {
     fontFamily: {
-      display: ['Rock Salt', 'sans-serif'],
-      body: ['PT Serif', 'serif']
+      display: ['Lora', 'serif'],
+      body: ['Open Sans', 'san-serif']
     },
-    extend: {},
+    extend: {}
   },
   variants: {},
-  plugins: [],
+  plugins: []
 }
