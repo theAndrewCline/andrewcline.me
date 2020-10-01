@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Nav
-import Html exposing (Html, a, button, div, h1, h2, h3, img, li, p, text, ul)
+import Html exposing (Html, a, button, div, h1, h2, h3, img, li, p, span, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Route exposing (Route(..), toRoute)
 import Url
@@ -94,16 +94,18 @@ view model =
 navBar : Html msg
 navBar =
     ul [ class "flex m-8 font-body font-bold" ]
-        [ li [ class "mr-auto flex items-center  h-100" ]
+        [ li [ class "mr-auto flex justify-center items-center h-100" ]
             [ h1
-                [ class "pr-4 bold text-2xl font-display border-r border-solid border-gray-400", href "/" ]
+                [ class "pr-4 bold text-2xl font-display ", href "/" ]
                 [ text "Andrew Cline" ]
-            , h2
-                [ class "pl-4 text-md bold mr-1 self-center" ]
-                [ text "Software Developer" ]
-            , h2
-                [ class "text-sm mr-1 self-center" ]
-                [ text " - Peoria, IL" ]
+            , span [ class "items-center hidden md:flex" ]
+                [ h2
+                    [ class "pl-4 text-md bold mr-1 self-center border-l border-solid border-gray-400" ]
+                    [ text "Software Developer" ]
+                , h2
+                    [ class "text-sm mr-1 self-center" ]
+                    [ text " - Peoria, IL" ]
+                ]
             ]
 
         -- , li [ class "mx-4 text-gray-600 font-display" ] [ text "Bio" ]
@@ -141,12 +143,18 @@ homeView =
         [ div
             [ class "container mx-auto flex justify-start bg-gray-100 rounded px-12 py-8" ]
             [ div [ class "flex flex-col items-start justify-center" ]
-                [ div [ class "flex items-end mb-8" ]
-                    [ img [ src "./headshot.jpg", class "rounded-full mr-8" ] []
-                    , h1 [ class "font-display text-6xl mb-2" ] [ text "Hello World!" ]
+                [ div [ class "flex flex-col bold mx-auto md:m-2 md:mb-8 justify-center items-center md:flex-row items-end " ]
+                    [ img [ src "./headshot.jpg", class "rounded-full mb-4 md:mr-8" ] []
+                    , h1
+                        [ class "font-display text-5xl md:text-6xl mb-2 " ]
+                        [ text "Hello, World!" ]
                     ]
-                , p [ class "font-body text-xl mb-4" ] [ text "I am a creative, self-motivated, servant leader. As a developer, I use modern technologies and best common practices to create performant web applications." ]
-                , p [ class "font-body text-xl mb-4" ] [ text "I am excited to get to know you" ]
+                , p
+                    [ class "font-body text-xl mb-4" ]
+                    [ text "I am a creative, self-motivated, servant leader. As a developer, I use modern technologies and best common practices to create performant web applications." ]
+                , p
+                    [ class "font-body text-xl mb-4" ]
+                    [ text "I am excited to get to know you" ]
                 ]
             ]
         ]
