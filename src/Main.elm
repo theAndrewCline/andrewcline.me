@@ -244,7 +244,7 @@ contactView : Html msg
 contactView =
     div [ class "container mx-auto flex" ]
         [ h1 [ class "text-5xl font-display" ] [ text "Contact" ]
-        , form [ name "contact", attribute "netlify" "" ]
+        , form [ name "contact", method "POST", attribute "data-netlify" "true" ]
             [ div []
                 [ label [] [ text "Name", input [ type_ "text", name "name" ] [] ]
                 ]
@@ -252,7 +252,7 @@ contactView =
                 [ label [] [ text "Email", input [ type_ "email", name "email" ] [] ]
                 ]
             , div []
-                [ label [] [ text "Message", input [ type_ "textarea" ] [] ]
+                [ label [] [ text "Message", input [ type_ "textarea", name "message" ] [] ]
                 ]
             , div []
                 [ button [ type_ "submit" ] [ text "Submit" ]
