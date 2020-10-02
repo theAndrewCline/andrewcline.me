@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Nav
-import Html exposing (Html, a, button, div, h1, h2, h3, img, li, p, span, text, ul)
+import Html exposing (Html, div, h1, h2, img, li, p, span, text, ul)
 import Html.Attributes exposing (class, href, src)
 import Route exposing (Route(..), toRoute)
 import Url
@@ -138,10 +138,52 @@ homeView =
                     ]
                 , p
                     [ class "font-body text-xl mb-4" ]
-                    [ text "Hi, I am Andrew, I live in Peoria Illinois with my wife, Kristin, and our two dogs. My hobbies include making excellent coffee, hiking with my dogs, playing guitar, and of course writing code. I typicially spend my weekends helping my church with various technical or musical needs, learning something new, or spending time with my loved ones. I love that, as a fullstack software developer, I get to create unique experiances and solve problems for people every day." ]
+                    [ text "Hi, I am Andrew, I live in Peoria Illinois with my wife, Kristin, and our two dogs. My hobbies include making excellent coffee, hiking with my dogs, playing guitar, and of course writing code. I typically spend my weekends helping my church with various technical or musical needs, learning something new, or spending time with my loved ones. I love that, as a full-stack software developer, I get to create unique experiences and solve problems for people every day." ]
                 , p
                     [ class "font-body text-xl mb-4" ]
                     [ text "I am excited to get to know you" ]
+                ]
+            ]
+        , div [ class "container mx-auto flex justify-start rounded px-12 py-8" ]
+            [ div [ class "flex flex-col items-start justify-center" ]
+                [ div [ class "flex flex-col bold mx-auto md:m-2  justify-center items-center md:flex-row items-end " ]
+                    [ h1
+                        [ class "font-display text-5xl mb-2 " ]
+                        [ text "Who Am I" ]
+                    ]
+                , p
+                    [ class "font-body text-xl mb-4" ]
+                    [ text "If you are into personality tests, I am an enneagram type nine and an ENFJ. I would say that my best qualities are adaptability, loyalty, and commitment to doing things right. I love working in teams to accomplish a clear goal. I enjoy learning and teaching others. I believe that dignity and respect are the inherent rights of all humans. I believe that by listening to one another and working together, we can solve the world's toughest issues. Obviously, I am a glass-half-full kind of guy." ]
+                ]
+            ]
+        , div [ class "container mx-auto flex justify-start rounded px-12 py-8" ]
+            [ div [ class "flex flex-col items-start justify-center" ]
+                [ div [ class "flex flex-col bold mx-auto md:m-2  justify-center items-center md:flex-row items-end " ]
+                    [ h1
+                        [ class "font-display text-5xl mb-2 " ]
+                        [ text "How I Work" ]
+                    ]
+                , p
+                    [ class "font-body text-xl mb-4" ]
+                    [ text "I like to work in teams, being able to interact with a dynamic team with clear objectives is very motivating for me. I like receiving consistent feedback and having clear goals. I always want to improve, whether that be technical or interpersonal skills, I want to keep growing." ]
+                , p
+                    [ class "font-body text-xl mb-4" ]
+                    [ text "As far as project management, I am not picky. I think what is important is creating a backlog of what is truly important to the end-users, releasing it to them quickly, and receiving quality feedback from them. I like Facebook's idea of personal responsibility, \"If you see something wrong, it's your job to fix it.\"" ]
+                ]
+            ]
+        , div [ class "container mx-auto flex justify-start rounded px-12 py-8 bg-gray-100" ]
+            [ div [ class "flex flex-col items-start justify-center" ]
+                [ div [ class "flex flex-col bold mx-auto md:m-2  justify-center items-center md:flex-row items-end " ]
+                    [ h1
+                        [ class "font-display text-5xl mb-2 " ]
+                        [ text "Things I Am Good At" ]
+                    ]
+                , p
+                    [ class "font-body text-xl mb-4" ]
+                    [ text "Most of my tech career has been spent writing JavaScript. My Favorite JavaScript Tools are currently Vue, React, Jest, Cypress, and RxJS, but I would be comfortable in any JavaScript Framework. On the backend, I use Node and Express, I also have experience with SQLite and MongoDB." ]
+                , p
+                    [ class "font-body text-xl mb-4" ]
+                    [ text "I have recently been expanding my skills to include other languages, including Rust, Go, and Haskell. I can make a basic web service in any of these languages. I am also good at learning, so I can pick anything up quickly." ]
                 ]
             ]
         , div [ class "container mx-auto flex justify-start rounded px-12 py-8" ]
@@ -153,10 +195,10 @@ homeView =
                     ]
                 , p
                     [ class "font-body text-xl mb-4" ]
-                    [ text "Currently, most of the projects I am working on are related to creating and deploying frontend applications for Enterprise IOT solutions. I spend most of my time in Vim (my prefered code editor) writting JavaScript or TypeScript using libraries like Vue, React, or Angular. Some of the features I have helped develop include real time diagnostic dashboards, live interactive maps, and various services to aggrigate data." ]
+                    [ text "Currently, most of the projects I am working on are related to creating and deploying front-end applications for Enterprise IoT solutions. I spend most of my time in Vim (my preferred code editor) writing JavaScript or TypeScript using libraries like Vue, React, or Angular. Some of the features I have helped develop include real-time diagnostic dashboards, live interactive maps, and various services to aggregate data." ]
                 , p
                     [ class "font-body text-xl mb-4" ]
-                    [ text "Some of the applications my team has created at my current job are deployed on small touch screen displays running a custom distibution of Linux. This has given me a great handle on working with command line tools such as ssh, scp, and grep. Our frontend applications are usually either deployed on Node or C++ web servers." ]
+                    [ text "Some of the applications my team has created at my current job are deployed on small touch screen displays running a custom distribution of Linux. This has given me a great handle on working with command-line tools such as ssh, scp, and grep. Our frontend applications are usually either deployed on Node or C++ web servers." ]
                 ]
             ]
         , div [ class "container mx-auto flex justify-start rounded px-12 py-8" ]
@@ -168,10 +210,10 @@ homeView =
                     ]
                 , p
                     [ class "font-body text-xl mb-4" ]
-                    [ text "Yep, I am self taught, while I did have friends and the internet to help teach me, I did not finish collage. This was a very intetional choice though, when I switched my major to web design at my community collage I found myself watching videos that I could access without paying for collage. I started to feel like I was not benefiting from my collage experance. I decided the best thing for me to do was find a job and learn programming in my free time." ]
+                    [ text "Yep, I am self-taught, while I did have friends and the internet to help teach me, I did not finish college. This was a very intentional choice though, when I switched my major to web design at my community college I found myself watching videos that I could access without paying for college. I started to feel like I was not benefiting from my college experience. I decided the best thing for me to do was find a job and learn programming in my free time." ]
                 , p
                     [ class "font-body text-xl mb-4" ]
-                    [ text "4 years later, I think it was the best choice I could have made. I have no school debt and I have cultivated an attitude of life long learning and self motivation. I currently have 2 years of on the job development experiance. I have been put in many situations where the only person available to solve a hard issue was me. Using my ability to learn on my own, I learned new technical skills and provided solutions to these hard issues. I think the disipline and self motivation skills I learned though teaching myself have made me a better developer." ]
+                    [ text "Four years later, I think it was the best choice I could have made. I have no school debt and I have cultivated an attitude of lifelong learning and self-motivation. I currently have two years of on the job development experience. I have been in many situations where the only person available to solve a difficult issue was me. Using my ability to learn on my own, I learned new technical skills and provided solutions to these hard issues. I think the discipline and self-motivation skills I learned through teaching myself have made me a better developer." ]
                 ]
             ]
         , div [ class "container mx-auto flex justify-start rounded px-12 py-8" ]
@@ -183,23 +225,10 @@ homeView =
                     ]
                 , p
                     [ class "font-body text-xl mb-4" ]
-                    [ text "I got introducted to functional programing through the React and RxJS libraries. I later heard about Elm and really fell in love. For those who do not know, Elm is pure functional programming language for building web applications. Elm boasts of near zero runtime exceptions, all with in a nice ML style syntax and simple standard library. In fact, this website is an Elm app." ]
+                    [ text "I got introduced to functional programming through the React and RxJS libraries. I later heard about Elm and fell in love. For those who do not know, Elm is a pure functional programming language for building web applications. Elm boasts of near-zero runtime exceptions, all within a nice ML style syntax and simple standard library. This website is an Elm app." ]
                 , p
                     [ class "font-body text-xl mb-4" ]
-                    [ text "From there I got more interested in doing backend programming. I wanted to find a good complement to Elm on the backend so I could do more outside of the browser. In my quest to find another programing language for the backend (aside from NodeJS) I tried out Rust, Go, Haskell, and a few others. I am going to continue learning Rust and Go as they both have features that I really enjoy and seem to have exciting futures." ]
-                ]
-            ]
-        , div
-            [ class "container mx-auto flex flex-col justify-start rounded px-12 py-8 bg-gray-100" ]
-            [ h1 [ class "font-display text-5xl mb-2 " ] [ text "Key Skills" ]
-            , ul [ class "list-disc" ]
-                [ li [ class "font-body text-xl mb-4" ] [ text "Languages - JavaScript, Elm, Go, Rust" ]
-                , li [ class "font-body text-xl mb-4" ] [ text "JS Frameworks - React.js, Vue.js Angular" ]
-                , li [ class "font-body text-xl mb-4" ] [ text "Graphic Design - Photoshop, InDesign" ]
-                , li [ class "font-body text-xl mb-4" ] [ text "SW Workflow - Git, vim, Azure DevOps, AWS, Google Cloud Platform, Netlify" ]
-                , li [ class "font-body text-xl mb-4" ] [ text "Testing - TDD, Mocha, Jest, Cypress" ]
-                , li [ class "font-body text-xl mb-4" ] [ text "Server - Node.js, Express.js, MongoDB, SQLite, REST API, Postgres" ]
-                , li [ class "font-body text-xl mb-4" ] [ text "Office Applications - Word, Powerpoint, Excel" ]
+                    [ text "From there I got more interested in doing backend programming. I wanted to find a good complement to Elm on the backend so I could do more outside of the browser. In my quest to find another programing language for the backend (aside from NodeJS) I tried out Rust, Go, Haskell, and a few others. I am going to continue learning Rust and Go as they both have features that I enjoy and seem to have exciting futures." ]
                 ]
             ]
         ]
