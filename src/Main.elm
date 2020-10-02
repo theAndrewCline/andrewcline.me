@@ -2,8 +2,8 @@ module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Nav
-import Html exposing (Html, div, h1, h2, img, li, p, span, text, ul)
-import Html.Attributes exposing (class, href, src)
+import Html exposing (Html, button, div, form, h1, h2, img, input, label, li, p, span, text, ul)
+import Html.Attributes exposing (action, attribute, class, href, method, name, src, type_, value)
 import Route exposing (Route(..), toRoute)
 import Url
 
@@ -116,12 +116,18 @@ titleForRoute url =
         Home ->
             "Andrew Cline"
 
+        Contact ->
+            "Contact | Andrew Cline"
+
 
 router : Model -> Html Msg
 router model =
     case toRoute model.url of
         Home ->
             homeView
+
+        Contact ->
+            contactView
 
 
 homeView : Html msg
@@ -180,7 +186,7 @@ homeView =
                     ]
                 , p
                     [ class "font-body text-xl mb-4" ]
-                    [ text "Most of my tech career has been spent writing JavaScript. My Favorite JavaScript Tools are currently Vue, React, Jest, Cypress, and RxJS, but I would be comfortable in any JavaScript Framework. On the backend, I use Node and Express, I also have experience with SQLite and MongoDB." ]
+                    [ text "Most of my tech career has been spent writing JavaScript. My Favorite JavaScript Tools are currently Vue, React, Jest, Cypress, and RxJS, but I would be comfortable in any JavaScript Framework. I also enjoy writting in Elm. On the backend, I use Node and Express, I also have experience with SQLite and MongoDB." ]
                 , p
                     [ class "font-body text-xl mb-4" ]
                     [ text "I have recently been expanding my skills to include other languages, including Rust, Go, and Haskell. I can make a basic web service in any of these languages. I am also good at learning, so I can pick anything up quickly." ]
@@ -229,6 +235,27 @@ homeView =
                 , p
                     [ class "font-body text-xl mb-4" ]
                     [ text "From there I got more interested in doing backend programming. I wanted to find a good complement to Elm on the backend so I could do more outside of the browser. In my quest to find another programing language for the backend (aside from NodeJS) I tried out Rust, Go, Haskell, and a few others. I am going to continue learning Rust and Go as they both have features that I enjoy and seem to have exciting futures." ]
+                ]
+            ]
+        ]
+
+
+contactView : Html msg
+contactView =
+    div [ class "container mx-auto flex" ]
+        [ h1 [ class "text-5xl font-display" ] [ text "Contact" ]
+        , form [ name "contact", attribute "netlify" "" ]
+            [ div []
+                [ label [] [ text "Name", input [ type_ "text", name "name" ] [] ]
+                ]
+            , div []
+                [ label [] [ text "Email", input [ type_ "email", name "email" ] [] ]
+                ]
+            , div []
+                [ label [] [ text "Message", input [ type_ "textarea" ] [] ]
+                ]
+            , div []
+                [ button [ type_ "submit" ] [ text "Submit" ]
                 ]
             ]
         ]
