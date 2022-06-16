@@ -1,6 +1,6 @@
 export default function Index() {
   return (
-    <div className="bg-orange-50 min-h-screen p-8">
+    <div className="bg-orange-50 min-h-screen p-8 flex flex-col items-center">
       <p className="text-indigo-900 text-lg">
         👋 Hi, my name is <span className="font-bold">Andrew</span>!
       </p>
